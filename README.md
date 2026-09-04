@@ -41,12 +41,21 @@ el espectador sienta miedo real antes de que el humor rompa el formato.
 | Ir al inicio / final | `Home` / `End` |
 | Salto directo a lámina | Clic en los puntos del pie de página |
 | Pantalla completa | `F` |
+| **Versión resumida** de un acto | Clic sobre el título grande de *La Intro*, *El Nudo* o *El Desenlace* |
 | Ampliar una escena del storyboard | Clic sobre la imagen o en *Ver ficha completa* |
 | Navegar dentro del visor de escena | `←` `→` · cerrar con `Esc` |
 | Abrir el detalle de una referencia | Clic sobre cualquier tarjeta de *Guiños & Referencias* |
 | Recorrer las 14 locaciones | Flechas del carrusel o clic en los chips numerados |
 | Cerrar la transmisión | Clic o `→` en la última lámina (dispara el glitch) |
 | Parar / reanudar el cronómetro | Botón junto al badge `LIVE`, disponible al cerrar la transmisión |
+
+La versión resumida no se anuncia: el título no lleva subrayado, ni color distinto, ni
+icono, ni globo de ayuda. Lo único que cambia es el cursor al pasar por encima, para que
+quien presenta pueda encontrarla sin que el público vea que hay algo ahí. Cada acto abre
+un modal con el mismo relato en un solo párrafo —los mismos hechos, los mismos datos y el
+mismo orden que la versión larga, que sigue intacta en la lámina—, pensado para cuando hay
+que contar la historia en menos tiempo. Con el resumen abierto las flechas no cambian de
+lámina; se cierra con `Esc`, con el botón o tocando fuera.
 
 ### En móvil y tablet
 

@@ -64,12 +64,12 @@ el espectador sienta miedo real antes de que el humor rompa el formato.
 | # | Lámina | Fondo |
 |---|---|---|
 | 01 | Portada · título, datos del ejercicio, personaje y sentimiento asignados | `00. PORTADA` |
-| 02 | La marca y el producto · qué es Liquid Death, portafolio, estilo de comunicación y por qué justifica esta historia | `05. STORYBOARD` |
+| 02 | La marca y el producto · infografía de quién es Liquid Death, su portafolio y cómo comunican | `05. STORYBOARD` |
 | 03 | La Trama · **La Intro** (planteamiento) | `01. TRAMA` |
 | 04 | La Trama · **El Nudo** (confrontación) | `01. TRAMA` |
 | 05 | La Trama · **El Desenlace** (resolución) | `01. TRAMA` |
 | 06 | La Trama · **El Tono** · registro dominante + matices + mecanismo en 3 pasos | `01. TRAMA` |
-| 07 | **Guiños & Referencias** · 12 tarjetas clicables con el dato real | `01. TRAMA` |
+| 07 | **Guiños & Referencias** · 13 tarjetas clicables con datos clave y el hecho real | `01. TRAMA` |
 | 08 | Personaje · Demográfico (dossier de 8 campos) | `02. PERSONAJE` |
 | 09 | Personaje · Actitudes y Opiniones (6 tarjetas) | `02. PERSONAJE` |
 | 10 | Personaje · Intereses (4 tarjetas) | `02. PERSONAJE` |
@@ -172,7 +172,8 @@ Las 12 referencias de *Guiños & Referencias* citan hechos verificables: 1I/ʻOu
 Webb, la Sonda Parker, el PET, el sufijo *–maxxing* de internet, el monolito de *2001: Odisea
 del espacio* y el de Utah (2020), la Agenda 2030 y sus 17 ODS, las plataformas de video
 generativo (Sora, Veo, Runway, Kling, Luma, Pika), la conspiración reptiliana de David Icke,
-la emisión de *La guerra de los mundos* (1938) y la misión real «Death to Plastic» de la marca.
+la emisión de *La guerra de los mundos* (1938), la misión real «Death to Plastic» de la marca
+y la regla del video borroso del alien (Patterson–Gimlin 1967, los videos OVNI del Pentágono).
 
 ---
 

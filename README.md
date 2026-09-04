@@ -15,6 +15,7 @@ para el storyboard y para las referencias de la historia.
 | **Personaje asignado** | Alien (Kzár Xylar) |
 | **Sentimiento asignado** | Euforia |
 | **Duración de la pieza narrada** | 85 segundos · 17 escenas de 5 s |
+| **Cuándo ocurre** | Octubre de 2026 |
 
 ---
 
@@ -22,7 +23,7 @@ para el storyboard y para las referencias de la historia.
 
 Un falso noticiero global de 85 segundos. Un objeto interestelar frena a propósito antes de
 llegar a la Tierra, el Pentágono pone su mensaje al aire y el mundo escucha a **Xylar**, del
-*Tribunal de Purga P.E.T.*, anunciar que el plástico no es el asesino: los asesinos son los
+*Tribunal P.E.T.* (Purga Evolutiva Total), anunciar que el plástico no es el asesino: los asesinos son los
 habitantes. Mientras los gobiernos se rinden, un movimiento juvenil absurdo llamado
 **Alumaxxing** revienta latas de aluminio contra su propia frente, y la ONU acaba enviando al
 espacio a una marca de agua. Lo que desactiva la purga no es un argumento: es una lata.

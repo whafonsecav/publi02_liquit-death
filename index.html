@@ -2,7 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#04050a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Liquid Death x Alien">
 <title>Storytelling &amp; Storyboard · Liquid Death x Alien · Publicidad 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1602,6 +1607,60 @@ body.noanim .livewrap{}
 .c2meta .m2 .v2 em{font-style:normal;color:var(--acc)}
 
 /* =========================================================================
+   MOVIL Y TABLET
+   ========================================================================= */
+html,body{height:100%;overscroll-behavior:none;-webkit-text-size-adjust:100%}
+#viewport{touch-action:manipulation}
+@supports (height:100dvh){#viewport{height:100dvh}}
+#viewer,#wv{touch-action:manipulation}
+#vbody,#wvbody{touch-action:auto;-webkit-overflow-scrolling:touch}
+
+/* en vertical el escenario rota para llenar la pantalla */
+body.rot #viewport{overflow:hidden}
+#rothint{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:420;
+  display:none;align-items:center;gap:11px;padding:12px 18px 11px;
+  background:rgba(4,5,10,.88);border:1px solid rgba(124,240,60,.42);
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:#7cf03c;pointer-events:none;transition:opacity .6s;white-space:nowrap}
+body.rot #rothint{display:flex}
+#rothint.gone{opacity:0}
+#rothint b{font-size:15px;line-height:1}
+
+/* controles y textos minimos en pantallas tactiles */
+@media (pointer:coarse){
+  .cbtn{width:76px;height:76px;font-size:27px}
+  .vbtn{width:72px;height:72px;font-size:25px}
+  #dots button{height:9px}
+  #dots button.on{height:9px}
+  .cchip{font-size:13px;padding:10px 13px 9px;letter-spacing:.1em}
+  .sopen{font-size:14px}
+  .gcard .gbtn{font-size:14px;padding:16px 22px 15px}
+  #vclose,#wvclose{font-size:13.5px;padding:17px 22px}
+  .frame .zoom{opacity:1;transform:scale(1);width:44px;height:44px;font-size:18px}
+  .keys{display:none}
+  /* sin estados de hover: en tactil se quedan pegados */
+  .frame:hover,.slab:hover,.mkp:hover,.wcard:hover,.loc:hover,.tone:hover,
+  .step:hover,.bstat:hover,.bprod:hover,.row:hover,.idea:hover,.tsub:hover,
+  .c2ass .a2:hover,.dfield:hover,.wcard:hover{transform:none}
+}
+
+/* =========================================================================
+   CENTRADO DEL ESCENARIO EN CUALQUIER ANCHO
+   ========================================================================= */
+#viewport,#vstage,#wvstage{display:block}
+#stage,#vinner,#wvinner{position:absolute;left:50%;top:50%;
+  margin:-582px 0 0 -960px;transform-origin:center center}
+
+/* el aviso de giro se adapta al ancho disponible */
+#rothint{white-space:normal;max-width:calc(100vw - 34px);font-size:9.5px;
+  letter-spacing:.14em;line-height:1.45;padding:11px 15px 10px;text-align:left}
+#rothint b{flex:0 0 auto;font-size:14px}
+
+/* el escenario respeta el area segura del dispositivo */
+#viewport{padding:0}
+body{margin:0}
+
+/* =========================================================================
    SENSACION 3D  ·  el fondo va sobredimensionado 2.8% y deriva en perspectiva.
    --px / --py viven en #stage, asi que TODAS las laminas comparten el mismo
    valor en el mismo instante: al avanzar no se percibe ningun salto.
@@ -1646,6 +1705,8 @@ body.noanim .livewrap{}
   </div>
   <div class="bbot"><span>Publicidad 2 &middot; Parcial 01</span><span>William H. Fonseca.</span></div>
 </div>
+
+<div id="rothint"><b>&#10227;</b>Gira el dispositivo para verlo en horizontal</div>
 
 <div id="viewport">
   <div id="stage">
@@ -1773,13 +1834,87 @@ var WINKS = [{"t": "Objeto interestelar", "k": "El arranque de la historia est&a
   var booting = false;
 
   /* ---------- ESCALADO ---------- */
-  function fit() {
-    var s = Math.min(window.innerWidth / STAGE_W, window.innerHeight / STAGE_H);
-    stage.style.transform  = 'scale(' + s + ')';
-    vinner.style.transform = 'scale(' + s + ')';
+  /* Se mide el viewport VISIBLE (en movil la barra del navegador cambia el
+     alto) y, si la pantalla es tactil y esta en vertical, el escenario rota
+     90 grados para llenarla. En escritorio nada de esto se activa. */
+  var rotated = false;
+
+  function coarse() {
+    return window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
   }
+  function vpW() {
+    var v = window.visualViewport;
+    return (v && v.width > 0 ? v.width : 0) || window.innerWidth ||
+           document.documentElement.clientWidth;
+  }
+  function vpH() {
+    var v = window.visualViewport;
+    return (v && v.height > 0 ? v.height : 0) || window.innerHeight ||
+           document.documentElement.clientHeight;
+  }
+
+  function fit() {
+    var W = vpW(), H = vpH(), tr;
+    /* si el navegador aun no reporta medidas validas, se reintenta */
+    if (!(W > 0) || !(H > 0)) { setTimeout(fit, 60); return; }
+    rotated = coarse() && H > W * 1.02;
+    if (rotated) {
+      tr = 'rotate(90deg) scale(' + Math.min(H / STAGE_W, W / STAGE_H) + ')';
+    } else {
+      tr = 'scale(' + Math.min(W / STAGE_W, H / STAGE_H) + ')';
+    }
+    stage.style.transform  = tr;
+    vinner.style.transform = tr;
+    var wvi = document.getElementById('wvinner');
+    if (wvi) wvi.style.transform = tr;
+    document.body.classList.toggle('rot', rotated);
+  }
+  window.__ldFit = fit;
   window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function () { setTimeout(fit, 120); });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', fit);
+    window.visualViewport.addEventListener('scroll', fit);
+  }
+  document.addEventListener('fullscreenchange', function () { setTimeout(fit, 60); });
+  document.addEventListener('webkitfullscreenchange', function () { setTimeout(fit, 60); });
   fit();
+  window.addEventListener('load', fit);
+  setTimeout(fit, 300);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+  /* el aviso de giro se retira solo */
+  var rh = document.getElementById('rothint');
+  if (rh) setTimeout(function () { rh.classList.add('gone'); }, 5200);
+
+  /* ---------- PANTALLA COMPLETA ---------- */
+  function isFull() {
+    return document.fullscreenElement || document.webkitFullscreenElement;
+  }
+  function toggleFull() {
+    var el = document.documentElement;
+    try {
+      if (isFull()) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      } else {
+        var rq = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+        if (rq) rq.call(el);
+      }
+    } catch (err) { /* algunos navegadores moviles no lo permiten */ }
+  }
+  function esControl(t) {
+    return t && t.closest && t.closest('button,.cchip,.frame,[data-wink],[data-open],#foot,a');
+  }
+  document.addEventListener('dblclick', function (ev) {
+    if (esControl(ev.target)) return;
+    toggleFull();
+  });
+  var lastTap = 0;
+  document.addEventListener('touchend', function (ev) {
+    var t = Date.now();
+    if (t - lastTap < 330 && !esControl(ev.target)) { lastTap = 0; toggleFull(); }
+    else { lastTap = t; }
+  }, { passive: true });
 
   /* ---------- CRONOMETRO EN VIVO ---------- */
   var t0 = null, iv = null, elapsed = 0, running = false;
@@ -1940,9 +2075,12 @@ var WINKS = [{"t": "Objeto interestelar", "k": "El arranque de la historia est&a
     if (booting) return;
     var dx = e.changedTouches[0].clientX - tx;
     var dy = e.changedTouches[0].clientY - ty;
-    if (Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy)) return;
+    /* con el escenario rotado, el eje logico horizontal es el vertical fisico */
+    var pri = rotated ? dy : dx;
+    var sec = rotated ? dx : dy;
+    if (Math.abs(pri) < 50 || Math.abs(pri) < Math.abs(sec)) return;
     var open = viewer.classList.contains('on');
-    if (dx < 0) { open ? vNext() : next(); } else { open ? vPrev() : prev(); }
+    if (pri < 0) { open ? vNext() : next(); } else { open ? vPrev() : prev(); }
   }, { passive: true });
 
   /* =======================================================================
@@ -2030,7 +2168,7 @@ var WINKS = [{"t": "Objeto interestelar", "k": "El arranque de la historia est&a
 
   /* FLIP: la tarjeta clicada crece y se corre a la izquierda */
   function flip(fromEl) {
-    if (!fromEl) return;
+    if (!fromEl || rotated) return;
     var a = fromEl.getBoundingClientRect();
     var b = vimg.getBoundingClientRect();
     if (!b.width) return;
@@ -2060,6 +2198,7 @@ var WINKS = [{"t": "Objeto interestelar", "k": "El arranque de la historia est&a
   function vClose() {
     /* al cerrar, el deck queda en la lamina de la escena en la que se quedo
        el visor, no en la que estaba antes de abrirlo */
+    if (rotated) srcCard = null;
     var tgt = document.querySelector('.frame[data-i="' + vIdx + '"]');
     if (tgt) {
       var tsl = tgt.closest('.slide');
@@ -2210,12 +2349,8 @@ var WINKS = [{"t": "Objeto interestelar", "k": "El arranque de la historia est&a
   var inner = document.getElementById('wvinner');
   var idx = -1;
 
-  function fitw() {
-    var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1164);
-    inner.style.transform = 'scale(' + s + ')';
-  }
-  window.addEventListener('resize', fitw);
-  fitw();
+  /* el ajuste lo centraliza el motor principal */
+  if (window.__ldFit) window.__ldFit();
 
   function render(n) {
     idx = n;

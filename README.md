@@ -48,6 +48,29 @@ el espectador sienta miedo real antes de que el humor rompa el formato.
 | Cerrar la transmisión | Clic o `→` en la última lámina (dispara el glitch) |
 | Parar / reanudar el cronómetro | Botón junto al badge `LIVE`, disponible al cerrar la transmisión |
 
+### En móvil y tablet
+
+El deck es una lámina fija de **1920 × 1164 px** que se escala con `transform`,
+así que la maqueta, los recuadros y los tamaños de letra son **idénticos en
+cualquier pantalla**: nunca se reordena ni se recorta, solo cambia el zoom.
+
+| Situación | Comportamiento |
+|---|---|
+| Cualquier ancho | La lámina se centra y se escala al viewport **visible** (`visualViewport`), así que la barra del navegador que aparece y desaparece en móvil no descuadra nada |
+| Móvil o tablet en **vertical** | La lámina **rota 90°** para aprovechar el lado largo de la pantalla y aparece el aviso *Gira el dispositivo para verlo en horizontal* |
+| Móvil o tablet en **horizontal** | Se muestra derecha y a la mayor escala posible |
+| Cambio de orientación | Se reajusta solo (`orientationchange`, `resize`, `visualViewport`) |
+| Avanzar | Swipe; con la lámina rotada el gesto se remapea al eje físico correcto |
+| Doble toque | Entra y sale de pantalla completa |
+| Controles | Flechas, chips y botones crecen en pantallas táctiles (`@media (pointer:coarse)`) y se desactivan los estados `:hover`, que en táctil se quedan pegados |
+
+> En **iPhone**, Safari no expone la API de pantalla completa para elementos
+> (solo para vídeo), así que el doble toque no puede ocultar la barra del
+> navegador. La alternativa es *Compartir → Agregar a pantalla de inicio*: el
+> sitio declara `apple-mobile-web-app-capable`, por lo que abierto desde el
+> icono se ejecuta sin barra ni pestañas. En Android Chrome y en iPad el doble
+> toque sí entra en pantalla completa.
+
 ### Enlaces profundos
 
 | URL | Efecto |

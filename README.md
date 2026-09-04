@@ -218,6 +218,19 @@ El HTML se genera a partir de los dos entregables del parcial, sin resumir:
 La narración de la Intro, el Nudo y el Desenlace se reescribió en tercera persona omnisciente
 para la presentación, conservando todos los hechos del entregable original.
 
+Sobre ese texto se aplican unas normalizaciones, en un solo lugar del generador, para
+que el deck hable con una sola voz aunque las fuentes usen términos distintos:
+
+| Norma | Por qué |
+|---|---|
+| El personaje es el **alien** | El entregable y el storyboard lo llamaban a veces *extraterrestre* y a veces *alienígena*. El personaje asignado del ejercicio es el alien |
+| **Tribunal P.E.T.** (Purga Evolutiva Total) | Aparecía como *Tribunal de Purga P.E.T.*; la sigla se explica en la primera mención de cada lámina |
+| **Protocolo de Limpieza Planetaria** | Se llamaba *de Asesinato Planetario*, y acabar con la civilización es el primer paso del protocolo, no su objetivo |
+| **Octubre de 2026** | Es el cuándo de la historia. Las fechas históricas de los guiños no se tocan |
+| **Alegría**, no felicidad | La emoción asignada es la alegría, que escala a euforia |
+| Cada voz declara **país e idioma** | Y los subtítulos, que siempre van en español, solo aparecen cuando la voz no está en español |
+
+
 Las 12 referencias de *Guiños & Referencias* citan hechos verificables: 1I/ʻOumuamua (2017) y
 3I/ATLAS (2025), la falla real de telemetría de la Voyager 1 (2023–2024), el telescopio James
 Webb, la Sonda Parker, el PET, el sufijo *–maxxing* de internet, el monolito de *2001: Odisea

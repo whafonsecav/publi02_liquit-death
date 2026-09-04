@@ -56,6 +56,7 @@ cualquier pantalla**: nunca se reordena ni se recorta, solo cambia el zoom.
 
 | Situación | Comportamiento |
 |---|---|
+| Lámina de conexión | Vive en el mismo marco de 1920 × 1164 que el deck: escala y rota igual |
 | Cualquier ancho | La lámina se centra y se escala al viewport **visible** (`visualViewport`), así que la barra del navegador que aparece y desaparece en móvil no descuadra nada |
 | Móvil o tablet en **vertical** | La lámina **rota 90°** para aprovechar el lado largo de la pantalla y aparece el aviso *Gira el dispositivo para verlo en horizontal* |
 | Móvil o tablet en **horizontal** | Se muestra derecha y a la mayor escala posible |
@@ -180,6 +181,32 @@ badge a `FIN`, con opción de reanudar.
 
 ---
 
+## Carga y rendimiento
+
+**La lámina de conexión precarga de verdad.** No es un adorno: descarga los seis
+fondos y los diecisiete bocetos, los decodifica, y solo cuando termina invita a
+avanzar. Muestra el conteo real (`14 / 24 imágenes`), el porcentaje y una barra
+que se mueve con la descarga, y cada línea del terminal se confirma con un tramo
+real del progreso. A partir de ahí, ir y volver entre láminas es instantáneo
+porque todo está ya en caché. Si algo no responde, entra igual a los 30 segundos:
+nadie queda encerrado en la pantalla de carga.
+
+**El peso bajó de 98 MB a 8,3 MB.** Los fondos se sirven a 2400 px (se ven a
+1920) y los bocetos a 1100 px en escala de grises, que es como se muestran
+siempre. La descarga completa cabe en una conexión móvil normal.
+
+**La textura de emisión se dimensiona en píxeles de pantalla, no de lámina.**
+La trama de línea (`#scan`) y el grano (`#grain`) estaban fijados en píxeles de
+la lámina de 1920: al escalarla a 0,32 en un celular, esas líneas de 1 px cada
+3 px medían 0,32 px sobre una rejilla de 1 px, y el grano se desplazaba tres
+veces por segundo encima. Eso era el parpadeo de interferencia. Ahora el tamaño
+se recalcula desde la escala aplicada, así que sobre la pantalla mide lo mismo en
+cualquier dispositivo. Además, en pantallas táctiles se apagan la animación del
+grano y la deriva 3D del fondo, que reescribían dos variables CSS por frame sobre
+una capa a pantalla completa.
+
+---
+
 ## Fuentes del contenido
 
 El HTML se genera a partir de los dos entregables del parcial, sin resumir:
@@ -208,10 +235,15 @@ y la regla del video borroso del alien (Patterson–Gimlin 1967, los videos OVNI
 ├── index.html                     # la presentación completa (HTML + CSS + JS en un archivo)
 ├── .nojekyll                      # sirve las rutas con espacios sin procesar por Jekyll
 └── assets/
-    ├── img laminas/               # 6 fondos de sección
-    ├── img storyboard/            # 17 bocetos del storyboard (01–17)
+    ├── img laminas/web/           # 6 fondos de sección (2400 px, JPEG q86)
+    ├── img storyboard/web/        # 17 bocetos del storyboard (1100 px, JPEG q80, gris)
     └── logo/                      # logotipos institucionales
 ```
+
+Los originales de las imágenes (98 MB en PNG y JPEG de cámara) se quedan en la
+carpeta de trabajo como archivo; aquí solo viaja la versión web, **8,3 MB en
+total**. El deck apunta a `web/` y, si un boceto nuevo todavía no tiene su copia
+ligera, cae al original con cualquier extensión.
 
 `index.html` no tiene dependencias de build: solo carga las tipografías desde Google Fonts.
 Se puede abrir directamente con doble clic o servir como sitio estático.

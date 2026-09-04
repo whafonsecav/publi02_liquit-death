@@ -1492,6 +1492,19 @@ body.noanim .livewrap{}
 #wvuse p{font-family:var(--f-cond);font-weight:600;font-size:27px;line-height:1.3;color:#f4f1e8}
 #wvuse p b{color:var(--acc)}
 
+/* al pulsar la flecha: la barra se llena, se confirma por pasos y luego entra */
+#boot .bp b{position:absolute;left:0;top:0;bottom:0;width:0;background:#7cf03c;
+  box-shadow:0 0 18px rgba(124,240,60,.85)}
+#boot.locked .bp i{opacity:0;transition:opacity .18s}
+#boot.locked .bp b{animation:fillup .86s cubic-bezier(.35,0,.2,1) forwards}
+@keyframes fillup{from{width:0}to{width:100%}}
+#boot.locked .wt2{display:none}
+#boot.locked .ok2{display:inline-flex;opacity:0;animation:tlin .26s ease forwards}
+#boot.locked .bterm .tl:nth-child(1) .ok2{animation-delay:.28s}
+#boot.locked .bterm .tl:nth-child(2) .ok2{animation-delay:.50s}
+#boot.locked .bterm .tl:nth-child(3) .ok2{animation-delay:.72s}
+#boot.locked .bstate{opacity:0;animation:tlin .3s ease .92s forwards}
+
 /* =========================================================================
    SENSACION 3D  ·  el fondo va sobredimensionado 2.8% y deriva en perspectiva.
    --px / --py viven en #stage, asi que TODAS las laminas comparten el mismo
@@ -1531,7 +1544,7 @@ body.noanim .livewrap{}
       <div class="tl" style="animation-delay:1.9s"><span>&gt; Decodificando transmisi&oacute;n</span><i></i>
         <b><span class="wt2">conectando<s class="dt"><em>.</em><em>.</em><em>.</em></s></span><span class="ok2">ok</span></b></div>
     </div>
-    <div class="bp"><i></i></div>
+    <div class="bp"><i></i><b></b></div>
     <div class="bstate"><s></s><span class="off2">Conectando con la se&ntilde;al&hellip;</span><span class="on2">Conectado &middot; se&ntilde;al adquirida</span></div>
     <div class="bhint"><kbd>&rarr;</kbd>Pulsa la flecha para entrar en directo</div>
   </div>
@@ -2028,7 +2041,7 @@ var WINKS = [{"t": "Objeto interestelar", "k": "El arranque de la historia est&a
       boot.classList.add('go');
       startClock();
       setTimeout(function () { boot.classList.add('off'); }, 860);
-    }, 980);
+    }, 1520);
   }
 
   if (boot && qs.get('nb')) {

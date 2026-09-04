@@ -190,6 +190,29 @@ badge a `FIN`, con opción de reanudar.
 
 ---
 
+## La portada en PDF
+
+`Portada_Liquid_Death_x_Alien.pdf` es la lámina de portada como archivo suelto: una sola
+página en 16:9 exacto (338,7 × 190,5 mm), con el mismo diseño del deck y un botón que abre
+la presentación completa. Pesa 531 KB.
+
+Está **aplanado a propósito**. La primera versión salió en vectores y se llevó al PDF los
+modos de fusión del diseño —el grano en `overlay`, el desenfoque cromático del logo en
+`screen`—, sus máscaras y sus sombras difusas: 34 grupos de transparencia, 16 máscaras y
+modos `Screen` y `Overlay` en un archivo de una página. Varios visores renderizan mal esos
+grupos sobre fondo oscuro, y la página titilaba y se quedaba en negro. Ahora la portada se
+rasteriza con Chrome —que sí dibuja bien las fusiones—, se captura a 3× (3840 × 2160), se
+reduce a 2560 × 1440 con Lanczos y se guarda en JPEG progresivo q90. El PDF resultante no
+tiene **ni un solo** grupo de transparencia, así que no hay nada que un visor pueda
+interpretar mal. A 2560 px sobre una hoja de 338 mm son unos 192 ppp: nítido en pantalla,
+en proyector y en impresión.
+
+El botón sigue siendo un enlace real: sobre la imagen va un área transparente que produce
+la anotación de enlace del PDF. Y debajo del botón está la URL escrita, por si el archivo
+se imprime en papel y hay que teclearla.
+
+---
+
 ## Carga y rendimiento
 
 **La lámina de conexión precarga de verdad.** No es un adorno: descarga los seis
@@ -255,6 +278,7 @@ y la regla del video borroso del alien (Patterson–Gimlin 1967, los videos OVNI
 ```
 .
 ├── index.html                     # la presentación completa (HTML + CSS + JS en un archivo)
+├── Portada_Liquid_Death_x_Alien.pdf   # la portada como PDF de una página, con enlace al deck
 ├── .nojekyll                      # sirve las rutas con espacios sin procesar por Jekyll
 └── assets/
     ├── img laminas/web/           # 6 fondos de sección (2400 px, JPEG q86)
